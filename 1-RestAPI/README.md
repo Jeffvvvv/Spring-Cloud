@@ -1,6 +1,6 @@
-#Homework
+# Homework
 
-##Location Service Rest API Design
+##  Location Service Rest API Design
 - Get /drivers/{Id} to view a driver by ID
 - Post /drivers to create a driver
 - Get /dirvers/{Id}/locations to view all historical locations for an user
