@@ -11,44 +11,38 @@ public class Driver {
 
     //constructor
     //初始化的时候为什么不加id
-    public Driver(){}
+    public Driver() {
+    }
 
-    public Driver(String firstName, String lastName)
-    {
+    public Driver(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     @JsonProperty
-    public long getId()
-    {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(long id)
-    {
+    public void setId(long id) {
         this.id = id;
     }
 
     @JsonProperty
-    public String getFirstName()
-    {
+    public String getFirstName() {
         return this.firstName;
     }
 
-    public void setFirstName(String firstName)
-    {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
     @JsonProperty
-    public String getLastName()
-    {
+    public String getLastName() {
         return this.lastName;
     }
 
-    public void setLastName(String lastName)
-    {
+    public void setLastName(String lastName) {
         this.firstName = firstName;
     }
 }

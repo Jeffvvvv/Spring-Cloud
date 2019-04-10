@@ -14,7 +14,7 @@ public class GeoHashUtils {
             '7', '8', '9', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n',
             'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
-    private final static Map<Character,Integer> DECODE_MAP = new HashMap();
+    private final static Map<Character, Integer> DECODE_MAP = new HashMap();
 
     private static final int PRECISION = 12;
     private static final int[] BITS = {16, 8, 4, 2, 1};
@@ -31,7 +31,7 @@ public class GeoHashUtils {
     /**
      * Encodes the given latitude and longitude into a geohash
      *
-     * @param latitude Latitude to encode
+     * @param latitude  Latitude to encode
      * @param longitude Longitude to encode
      * @return Geohash encoding of the longitude and latitude
      */
@@ -118,6 +118,6 @@ public class GeoHashUtils {
         latitude = (latInterval[0] + latInterval[1]) / 2D;
         longitude = (lngInterval[0] + lngInterval[1]) / 2D;
 
-        return new double[] {latitude, longitude};
+        return new double[]{latitude, longitude};
     }
 }

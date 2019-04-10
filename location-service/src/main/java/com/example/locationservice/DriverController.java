@@ -29,8 +29,7 @@ public class DriverController {
     //留一个疑问，如何去parse parameters，如果request里面提供了FirstName和LastName
     @RequestMapping(value = "/drivers", method = RequestMethod.POST)
     public ResponseEntity<Driver> create(
-            @RequestBody(required = false) Driver driver)
-    {
+            @RequestBody(required = false) Driver driver) {
         driver = new Driver();
         long id = counter.incrementAndGet();
         driver.setId(id);
@@ -41,21 +40,21 @@ public class DriverController {
 
 
     @RequestMapping(value = "/drivers", method = RequestMethod.GET)
-    public ResponseEntity<List<Driver>> getAll()
-    {
+    public ResponseEntity<List<Driver>> getAll() {
         return new ResponseEntity<>(new ArrayList<>(drivers.values()), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Driver> get(@PathVariable("id") String id)
-    {
+    public ResponseEntity<Driver> get(@PathVariable("id") String id) {
         Driver driver = null;
-        if(!drivers.containsKey(id))
+        if (!drivers.containsKey(id))
             return new ResponseEntity<>(driver, HttpStatus.BAD_REQUEST);
 
         driver = drivers.get(id);
         return new ResponseEntity<>(driver, HttpStatus.OK);
     }
 
-    public static boolean isDriverValid(String id){return drivers.containsKey(id);}
+    public static boolean isDriverValid(String id) {
+        return drivers.containsKey(id);
+    }
 }

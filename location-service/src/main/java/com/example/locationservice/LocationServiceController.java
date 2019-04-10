@@ -17,16 +17,15 @@ public class LocationServiceController {
     @RequestMapping(value = "/drivers/{id}/locations", method = RequestMethod.POST)
     public ResponseEntity<Location> create(
             @PathVariable("id") String id,
-            @RequestBody(required = false) Location inputLocation)
-    {
+            @RequestBody(required = false) Location inputLocation) {
         Location location;
-        if(inputLocation == null) {
+        if (inputLocation == null) {
             location = new Location(random.nextInt(90), random.nextInt(90));
-        }else {
+        } else {
             location = new Location(inputLocation.getLatitude(), inputLocation.getLongitude());
         }
 
-        if(!locationsMap.containsKey(id)){
+        if (!locationsMap.containsKey(id)) {
             locationsMap.put(id, new DriverLocations(id));
         }
 
@@ -36,13 +35,13 @@ public class LocationServiceController {
 
     @RequestMapping(value = "/drivers/{id}/locations", method = RequestMethod.GET)
     public ResponseEntity<List<Location>> getAll(
-            @PathVariable("id") String id){
-        if(!DriverController.isDriverValid(id))
+            @PathVariable("id") String id) {
+        if (!DriverController.isDriverValid(id))
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
 
         DriverLocations driverlocation = locationsMap.get(id);
 
-        if(driverlocation == null)
+        if (driverlocation == null)
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
 
         return new ResponseEntity<>(driverlocation.getAll(), HttpStatus.OK);
@@ -51,24 +50,24 @@ public class LocationServiceController {
     @RequestMapping(value = "drivers/{id}/locations/{locationId}", method = RequestMethod.GET)
     public ResponseEntity<Location> get(
             @PathVariable("id") String id,
-            @PathVariable("locationId") String locationId){
+            @PathVariable("locationId") String locationId) {
         Location location = null;
 
-        if(!locationsMap.containsKey(id))
+        if (!locationsMap.containsKey(id))
             return new ResponseEntity<>(location, HttpStatus.BAD_REQUEST);
 
         DriverLocations driverLocation = locationsMap.get(id);
 
-        if(driverLocation.getLocation(Long.parseLong(locationId)) == null)
+        if (driverLocation.getLocation(Long.parseLong(locationId)) == null)
             return new ResponseEntity<>(location, HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(driverLocation.getLocation(Long.parseLong(locationId)), HttpStatus.OK);
     }
 
     @RequestMapping(value = "drivers/{id}/locations/current", method = RequestMethod.GET)
-    public ResponseEntity<Location> get(@PathVariable("id") String id){
+    public ResponseEntity<Location> get(@PathVariable("id") String id) {
         Location location = null;
-        if(!locationsMap.containsKey(id))
+        if (!locationsMap.containsKey(id))
             return new ResponseEntity<>(location, HttpStatus.BAD_REQUEST);
 
         DriverLocations driverlocation = locationsMap.get(id);
@@ -83,10 +82,10 @@ public class LocationServiceController {
             @PathVariable("locationId") String locationId) {
         Location location = null;
 
-        if(!locationsMap.containsKey(id))
+        if (!locationsMap.containsKey(id))
             return new ResponseEntity<>(location, HttpStatus.BAD_REQUEST);
 
-        if(locationsMap.get(id).updateLocation(Long.parseLong(locationId), inputLocation))
+        if (locationsMap.get(id).updateLocation(Long.parseLong(locationId), inputLocation))
             return new ResponseEntity<>(locationsMap.get(id).getLocation(Long.parseLong(locationId)), HttpStatus.OK);
         else
             return new ResponseEntity<>(location, HttpStatus.BAD_REQUEST);
@@ -95,21 +94,20 @@ public class LocationServiceController {
     @RequestMapping(value = "drivers/{id}/locations/{locationId}", method = RequestMethod.DELETE)
     public ResponseEntity<Location> delete(
             @PathVariable("id") String id,
-            @PathVariable("locationId") String locationId){
+            @PathVariable("locationId") String locationId) {
         return this.deleteHelper(id, locationId);
     }
 
-    private ResponseEntity<Location> deleteHelper(String id, String locationId)
-    {
+    private ResponseEntity<Location> deleteHelper(String id, String locationId) {
         Location location = null;
 
-        if(!locationsMap.containsKey(id)){
+        if (!locationsMap.containsKey(id)) {
             return new ResponseEntity<>(location, HttpStatus.BAD_REQUEST);
         }
 
         DriverLocations driverlocation = locationsMap.get(id);
 
-        if(driverlocation.deleteLocation(Long.parseLong(locationId)))
+        if (driverlocation.deleteLocation(Long.parseLong(locationId)))
             return new ResponseEntity<>(location, HttpStatus.NO_CONTENT);
         else
             return new ResponseEntity<>(location, HttpStatus.BAD_REQUEST);

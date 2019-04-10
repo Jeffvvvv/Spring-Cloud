@@ -11,60 +11,50 @@ public class Location {
     private long id;
 
     //constructor
-    public Location(double latitude, double longitude)
-    {
+    public Location(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.timestamp = LocalDateTime.now();
     }
 
     @JsonProperty
-    public double getLatitude()
-    {
+    public double getLatitude() {
         return this.latitude;
     }
 
-    public void setLatitude(double latitude)
-    {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
     @JsonProperty
-    public double getLongitude()
-    {
+    public double getLongitude() {
         return this.longitude;
     }
 
-    public void setLongitude(double longitude)
-    {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
     @JsonProperty
-    public long getId()
-    {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(long id)
-    {
+    public void setId(long id) {
         this.id = id;
     }
 
     @JsonProperty
-    public LocalDateTime getTimestamp()
-    {
+    public LocalDateTime getTimestamp() {
         return this.timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp)
-    {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
     @JsonProperty
-    public String getGeoHash()
-    {
+    public String getGeoHash() {
         return GeoHashUtils.encode(this.latitude, this.longitude);
     }
 }
